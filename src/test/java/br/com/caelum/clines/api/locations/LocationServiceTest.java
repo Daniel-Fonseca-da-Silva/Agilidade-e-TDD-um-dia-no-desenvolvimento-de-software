@@ -4,6 +4,7 @@ import br.com.caelum.clines.shared.domain.Country;
 import br.com.caelum.clines.shared.domain.Location;
 import br.com.caelum.clines.shared.exceptions.ResourceAlreadyExistsException;
 import br.com.caelum.clines.shared.exceptions.ResourceNotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,13 +18,10 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -83,7 +81,7 @@ class LocationServiceTest {
         then(repository).should().findByCountryAndStateAndCity(country, state, city);
         then(repository).should().save(location);
 
-        assertEquals(locationId, createdLocationId);
+        Assertions.assertEquals(locationId, createdLocationId);
     }
 
     @Test
@@ -108,13 +106,13 @@ class LocationServiceTest {
         then(repository).should(only()).findAll();
         then(mapper).should(times(2)).map(any(Location.class));
 
-        assertEquals(2, locationViews.size());
+        Assertions.assertEquals(2, locationViews.size());
 
         for (int i = 0; i < locationViews.size(); i++) {
-            assertEquals(locations.get(i).getId(), locationViews.get(i).getId());
-            assertEquals(locations.get(i).getCountry().getDescription(), locationViews.get(i).getCountry());
-            assertEquals(locations.get(i).getState(), locationViews.get(i).getState());
-            assertEquals(locations.get(i).getCity(), locationViews.get(i).getCity());
+            Assertions.assertEquals(locations.get(i).getId(), locationViews.get(i).getId());
+            Assertions.assertEquals(locations.get(i).getCountry().getDescription(), locationViews.get(i).getCountry());
+            Assertions.assertEquals(locations.get(i).getState(), locationViews.get(i).getState());
+            Assertions.assertEquals(locations.get(i).getCity(), locationViews.get(i).getCity());
         }
     }
 
@@ -127,6 +125,6 @@ class LocationServiceTest {
         then(repository).should(only()).findAll();
         then(mapper).should(times(0)).map(any(Location.class));
 
-        assertEquals(0, locationViews.size());
+        Assertions.assertEquals(0, locationViews.size());
     }
 }

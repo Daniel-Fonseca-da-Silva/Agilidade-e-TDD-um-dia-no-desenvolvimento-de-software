@@ -24,7 +24,7 @@ public class AircraftController {
     private final AircraftService service;
 
     @GetMapping("{code}")
-    AircraftView show(@PathVariable String code) {
+    AircraftView showAircraftBy(@PathVariable String code) {
         return service.showAircraftBy(normalize(code));
     }
 

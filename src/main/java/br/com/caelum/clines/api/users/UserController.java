@@ -30,4 +30,9 @@ public class UserController {
         return created(uri).build();
     }
 
+    @GetMapping("{id}")
+    UserView show(@PathVariable Long id) {
+        return service.showUserBy(id);
+    }
+
 }

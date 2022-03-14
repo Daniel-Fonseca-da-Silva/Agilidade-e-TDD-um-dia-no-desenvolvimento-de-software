@@ -1,6 +1,7 @@
 package br.com.caelum.clines.api.users;
 
 import br.com.caelum.clines.shared.exceptions.ResourceAlreadyExistsException;
+import br.com.caelum.clines.shared.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,11 @@ public class UserService {
         repository.save(user);
 
         return user.getId();
+    }
+
+    public UserView showUserBy(Long id) {
+        return repository.findById(id).map(viewMapper::map)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find user"));
     }
 
 

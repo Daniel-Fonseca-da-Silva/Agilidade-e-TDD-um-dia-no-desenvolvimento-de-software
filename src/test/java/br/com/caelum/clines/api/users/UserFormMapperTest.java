@@ -2,10 +2,8 @@ package br.com.caelum.clines.api.users;
 
 import br.com.caelum.clines.shared.domain.User;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.notNull;
 
 public class UserFormMapperTest {
 
